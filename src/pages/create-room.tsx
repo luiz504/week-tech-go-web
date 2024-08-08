@@ -1,15 +1,25 @@
 import { FC } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 import amaLogo from '../assets/ama-logo.svg'
+import { createRoom } from '../http/create-room'
 
 export const CreateRoom: FC = () => {
   const navigate = useNavigate()
-  const handleCreateRoom = (data: FormData) => {
+
+  const handleCreateRoom = async (data: FormData) => {
     const theme = data.get('theme')?.toString()
+    if (!theme) return
     console.log('ee', theme)
-    navigate('/room/i1jo2i3jo12ji3')
+
+    try {
+      const { roomId } = await createRoom({ theme })
+      navigate(`/room/${roomId}`)
+    } catch (err) {
+      toast.error('Failed to create room')
+    }
   }
 
   return (
@@ -31,6 +41,7 @@ export const CreateRoom: FC = () => {
             placeholder="Room name"
             autoComplete="off"
             className="flex-1 text-sm bg-transparent mx-2 outline-none placeholder:text-zinc-500 text-zinc-100"
+            required
           />
           <button
             type="submit"
