@@ -1,9 +1,13 @@
 import { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { ArrowRight, ArrowUp, Share2 } from 'lucide-react'
+import { ArrowRight, Share2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 import amaLogo from '../assets/ama-logo.svg'
+import { Message } from '../components/message'
+
+const lorem =
+  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, reiciendis quisquam fuga aliquam cum suscipit quaerat aspernatur, nisi earum unde possimus culpa, quod minima. At quis ipsam magnam quod aliquid!'
 export const Room: FC = () => {
   const { roomId } = useParams()
 
@@ -55,32 +59,9 @@ export const Room: FC = () => {
       </form>
 
       <ol className="list-decimal list-outside px-3 space-y-8">
-        <li className="ml-4 leading-relaxed text-zinc-100">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, fuga
-          ratione, saepe provident ipsum, ullam hic itaque inventore iusto illo
-          distinctio delectus eveniet minima sed facilis atque repellendus ad.
-          Minima.
-          <button
-            type="button"
-            className="mt-3 flex items-center gap-2 text-orange-400 text-sm font-medium hover:text-orange-500 transition-colors"
-          >
-            <ArrowUp className="size-4" />
-            Like question (222)
-          </button>
-        </li>
-        <li className="ml-4 leading-relaxed text-zinc-100">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, fuga
-          ratione, saepe provident ipsum, ullam hic itaque inventore iusto illo
-          distinctio delectus eveniet minima sed facilis atque repellendus ad.
-          Minima.
-          <button
-            type="button"
-            className="mt-3 flex items-center gap-2 text-zinc-400 text-sm font-medium hover:text-zinc-300 transition-colors"
-          >
-            <ArrowUp className="size-4" />
-            Like question (222)
-          </button>
-        </li>
+        <Message text={lorem} amountOfReactions={20} answered />
+        <Message text={lorem} amountOfReactions={10} />
+        <Message text={lorem} amountOfReactions={30} answered />
       </ol>
     </div>
   )
